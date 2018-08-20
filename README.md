@@ -1,4 +1,4 @@
-<img src="image/youtube_title.png" alt="subject_image" width="600" height="100">
+<img src="image/youtube_title.png" alt="subject_image" width="500" height="80">
 
 ## YouTube-Video-Hits-Prediction
 
