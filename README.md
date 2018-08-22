@@ -10,8 +10,9 @@
 
 ### Data Description
 
-train data
-- train.csv : crawling data from Youtube (now 3000 row 11 columns : will be updated)
+- Train data
+    - train.csv : crawling data from Youtube (now 3000 row 11 columns : will be updated)
 
-test data
-- make by using "sklearn.model_selection.train_test_split"
+- Test data
+    - Make test data by using "sklearn.model_selection.train_test_split"
+    - Collect new data not included in the train.csv and test it after modeling
