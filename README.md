@@ -4,6 +4,8 @@
 
 ```Let's find out what characteristics a video with a high number of views has.```
 
+```Project Period :2018.8.16 ~```
+
 
 ### Objective of project
 
