@@ -50,7 +50,7 @@
 ### 데이터 설명
 
 - Train data
-    - train.csv : 셀레니움을 활용하여 유튜브에서 크롤링한 데이터(현재 3400개 행에 11 열을 가지고 있음 : 업데이트 될 예정)
+    - train.csv : 셀레니움을 활용하여 유튜브에서 크롤링한 데이터(현재 10001개 행에 13 열을 가지고 있음 : 업데이트 될 예정)
     
 - Test data
     - "sklearn.model_selection.train_test_split" 을 이용하여 테스트 데이터를 만든다.
