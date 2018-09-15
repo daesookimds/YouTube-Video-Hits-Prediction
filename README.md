@@ -53,7 +53,6 @@
 
 - At first, using 33 columns to train lightGBM becasue to look at feature importance of views prediction
       
-      ```
        ['comments', 'dislike', 'like',
        'play_time', 'subscribers',
        'upload_date_year', 'upload_date_month', 'upload_date_day',
@@ -62,27 +61,25 @@
        'title_cosine_similarity', 'game', 'science', 'education', 'style',
        'news', 'animal', 'social', 'sports', 'entertainment', 'journey',
        'movie', 'music', 'people', 'automobile', 'comic', 'program', 'comment_cosine_similarity']
-       ```
+       
   that case: high importance features are like, dislike, (the number of)comments, subscribers, uploaded_days to predict views
   
  
 - Second, remove multicollinearity by using VIF(variance_inflation_factor)
   then, using 8 columns to train Statsmodels.OLS because to look at linear correlations
        
-       ```
         ['like', 'dislike', 'comments', 'play_time', 'subscribers', 'title_length', 'title_cosine_similarity',
         'comment_cosine_similarity']
-        ```
+        
  
 - Last, remove features that are out of trust in p-value 0.05
   then, using 4 columns to train Statsmodels.OLS because to look at linear correlations
        
-       ```
         ['like', 'dislike', 'title_length', 'comment_cosine_similarity']
-        ```
         
-        'like', 'title_length', 'comment_cosine_similarity' is a positive correlation with the number of hits.
-        'dislike' is a negative correlation with the number of hits.
+        
+    'like', 'title_length', 'comment_cosine_similarity' is a positive correlation with the number of hits.
+    'dislike' is a negative correlation with the number of hits.
                        
 
 ### Result
@@ -142,7 +139,6 @@
 
 - 처음에, 조회수를 예측할 때 중요한 특성들을 추려보기 위해 33개의 열을 가지고 lightGBM모델로 학습 시켜본다.
       
-       ```
        ['comments', 'dislike', 'like',
        'play_time', 'subscribers',
        'upload_date_year', 'upload_date_month', 'upload_date_day',
@@ -151,28 +147,26 @@
        'title_cosine_similarity', 'game', 'science', 'education', 'style',
        'news', 'animal', 'social', 'sports', 'entertainment', 'journey',
        'movie', 'music', 'people', 'automobile', 'comic', 'program', 'comment_cosine_similarity']
-       ```
+       
        
   이 경우: 높은 중요도를 나타내는 특성은 dislike, (the number of)comments, subscribers, uploaded_days 이다.
   
  
 - 그 다음으로, VIF(variance_inflation_factor)을 이용하여 다중공선성을 없애준다.
   그 후, 8개의 열로 Statsmodels.OLS을 사용하여 선형관계를 파악해본다.
-       
-       ```
+
        ['like', 'dislike', 'comments', 'play_time', 'subscribers', 'title_length', 'title_cosine_similarity',
         'comment_cosine_similarity']
-        ```
+        
  
 - 마지막으로, p-value 0.05가 넘는 경우의 열을 제거한다.
   그 후, 4개의 열을 가지고 Statsmodels.OLS 로 학습하여 선형관계를 파악한다.
-        
-        ```
+ 
         ['like', 'dislike', 'title_length', 'comment_cosine_similarity']
-        ```
+      
         
-        'like', 'title_length', 'comment_cosine_similarity' 는 조회수와 양의 상관관계이다.
-        'dislike' 는 조회수와 음의 상관관계이다.
+     'like', 'title_length', 'comment_cosine_similarity' 는 조회수와 양의 상관관계이다.
+     'dislike' 는 조회수와 음의 상관관계이다.
         
 ### 결과
 
