@@ -29,6 +29,56 @@
     - Average daily views
     - Because the number of views changes in real time, the daily average number of views is estimated by calculating the data collected at the time.
 
+### Data Preprocessing
+
+- upload_date : divide into year, month, day. (upload_date_year, upload_date_month, upload_date_day)
+- crawl_date : divide into year, month, day. (crawl_date_year, crawl_date_month, crawl_date_day)
+- uploaded_days : the number of days since the movie was posted before it was collected.
+- views : number of hits at the time of collection / uploaded_days
+- dislike : change object types into numeric types.
+- like : change object types into numeric types.
+- comments : the number of comments, change object types into numeric types.
+- subscribers : the number of subscribers, change object types into numeric types.
+- play_time : total video playback time
+- title_length : the length of title
+- tag_count : the number of tag
+- same_count : The same number of words between the title and tag.
+- title_cosine_similarity : the cosine similarity between title and tag.
+- comment_cosine_similarity : the cosine similarity between top_comment and tag.(top_comment is the most popular comment.)
+- category : one-hot encode to ['title', 'game', 'science', 'education', 'style', 'news', 'animal', 'social', 'sports',
+                       'entertainment', 'journey', 'movie', 'music', 'people', 'automobile', 'comic', 'program']
+                       
+                       
+### Feature Selection and Correlation.
+
+- At first, using 33 columns to train lightGBM becasue to look at feature importance of views prediction
+       ['comments', 'dislike', 'like',
+       'play_time', 'subscribers',
+       'upload_date_year', 'upload_date_month', 'upload_date_day',
+       'crawl_date_year', 'crawl_date_month', 'crawl_date_day',
+       'uploaded_days', 'title_length', 'tag_count', 'same_count',
+       'title_cosine_similarity', 'game', 'science', 'education', 'style',
+       'news', 'animal', 'social', 'sports', 'entertainment', 'journey',
+       'movie', 'music', 'people', 'automobile', 'comic', 'program', 'comment_cosine_similarity']
+       
+  that case: high importance features are like, dislike, (the number of)comments, subscribers, uploaded_days to predict views
+  
+ 
+- Second, remove multicollinearity by using VIF(variance_inflation_factor)
+  then, using 8 columns to train Statsmodels.OLS because to look at linear correlations
+        ['like', 'dislike', 'comments', 'play_time', 'subscribers', 'title_length', 'title_cosine_similarity',
+        'comment_cosine_similarity']
+ 
+- Last, remove features that are out of trust in p-value 0.05
+  then, using 4 columns to train Statsmodels.OLS because to look at linear correlations
+        ['like', 'dislike', 'title_length', 'comment_cosine_similarity']
+        
+        'like', 'title_length', 'comment_cosine_similarity' is a positive correlation with the number of hits.
+        'dislike' is a negative correlation with the number of hits.
+                       
+
+### Result
+
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -59,3 +109,53 @@
 - Target (예측하고자 하는 목표값)
     - 일평균 조회수
     - 조회수는 실시간으로 변화하기 때문에, 데이터를 수집한 시점을 기준으로 계산하여 일평균 조회수를 예측한다.
+
+### 데이터 전처리
+
+- upload_date : 년, 월, 일로 나누어준다. (upload_date_year, upload_date_month, upload_date_day)
+- crawl_date : 년, 월, 일로 나누어준다. (crawl_date_year, crawl_date_month, crawl_date_day)
+- uploaded_days : 동영상이 게시된 시점부터 크롤링된 시점까지의 일 수
+- views : 크롤링된 시점의 총 조회수 / 동영상이 게시된 시점부터 크롤링된 시점까지의 일 수 = 일평균 조회수
+- dislike : 문자형으로 되어있는 데이터를 숫자로 바꾸어준다.
+- like : 문자형으로 되어있는 데이터를 숫자로 바꾸어준다.
+- comments : 댓글 수, 문자형으로 되어있는 데이터를 숫자로 바꾸어준다.
+- subscribers : 구독자 수, 문자형으로 되어있는 데이터를 숫자로 바꾸어준다.
+- play_time : 동영상 총 재생시간
+- title_length : 제목의 길이
+- tag_count : 태그의 수
+- same_count : 제목과 태그 사이에 같은 단어 수
+- title_cosine_similarity : 제목과 태그 사이에 코사인 유사도
+- comment_cosine_similarity : 제목과 제일 인기있는 댓글 사이에 코사인 유사도(top_comment is the most popular comment.)
+- category : 원-핫 인코딩 ['title', 'game', 'science', 'education', 'style', 'news', 'animal', 'social', 'sports',
+                       'entertainment', 'journey', 'movie', 'music', 'people', 'automobile', 'comic', 'program']
+
+
+### 특성 선택 및 상관관계 보기
+
+- 처음에, 조회수를 예측할 때 중요한 특성들을 추려보기 위해 33개의 열을 가지고 lightGBM모델로 학습 시켜본다.
+       ['comments', 'dislike', 'like',
+       'play_time', 'subscribers',
+       'upload_date_year', 'upload_date_month', 'upload_date_day',
+       'crawl_date_year', 'crawl_date_month', 'crawl_date_day',
+       'uploaded_days', 'title_length', 'tag_count', 'same_count',
+       'title_cosine_similarity', 'game', 'science', 'education', 'style',
+       'news', 'animal', 'social', 'sports', 'entertainment', 'journey',
+       'movie', 'music', 'people', 'automobile', 'comic', 'program', 'comment_cosine_similarity']
+       
+  이 경우: 높은 중요도를 나타내는 특성은 dislike, (the number of)comments, subscribers, uploaded_days 이다.
+  
+ 
+- 그 다음으로, VIF(variance_inflation_factor)을 이용하여 다중공선성을 없애준다.
+  그 후, 8개의 열로 Statsmodels.OLS을 사용하여 선형관계를 파악해본다.
+        ['like', 'dislike', 'comments', 'play_time', 'subscribers', 'title_length', 'title_cosine_similarity',
+        'comment_cosine_similarity']
+ 
+- 마지막으로, p-value 0.05가 넘는 경우의 열을 제거한다.
+  그 후, 4개의 열을 가지고 Statsmodels.OLS 로 학습하여 선형관계를 파악한다.
+        ['like', 'dislike', 'title_length', 'comment_cosine_similarity']
+        
+        'like', 'title_length', 'comment_cosine_similarity' 는 조회수와 양의 상관관계이다.
+        'dislike' 는 조회수와 음의 상관관계이다.
+        
+### 결과
+
