@@ -52,7 +52,8 @@
 ### Feature Selection and Correlation.
 
 - At first, using 33 columns to train lightGBM becasue to look at feature importance of views prediction
-       ```
+      
+      ```
        ['comments', 'dislike', 'like',
        'play_time', 'subscribers',
        'upload_date_year', 'upload_date_month', 'upload_date_day',
@@ -67,14 +68,16 @@
  
 - Second, remove multicollinearity by using VIF(variance_inflation_factor)
   then, using 8 columns to train Statsmodels.OLS because to look at linear correlations
-        ```
+       
+       ```
         ['like', 'dislike', 'comments', 'play_time', 'subscribers', 'title_length', 'title_cosine_similarity',
         'comment_cosine_similarity']
         ```
  
 - Last, remove features that are out of trust in p-value 0.05
   then, using 4 columns to train Statsmodels.OLS because to look at linear correlations
-        ```
+       
+       ```
         ['like', 'dislike', 'title_length', 'comment_cosine_similarity']
         ```
         
@@ -138,6 +141,7 @@
 ### 특성 선택 및 상관관계 보기
 
 - 처음에, 조회수를 예측할 때 중요한 특성들을 추려보기 위해 33개의 열을 가지고 lightGBM모델로 학습 시켜본다.
+      
        ```
        ['comments', 'dislike', 'like',
        'play_time', 'subscribers',
@@ -154,12 +158,15 @@
  
 - 그 다음으로, VIF(variance_inflation_factor)을 이용하여 다중공선성을 없애준다.
   그 후, 8개의 열로 Statsmodels.OLS을 사용하여 선형관계를 파악해본다.
-        ```['like', 'dislike', 'comments', 'play_time', 'subscribers', 'title_length', 'title_cosine_similarity',
+       
+       ```
+       ['like', 'dislike', 'comments', 'play_time', 'subscribers', 'title_length', 'title_cosine_similarity',
         'comment_cosine_similarity']
         ```
  
 - 마지막으로, p-value 0.05가 넘는 경우의 열을 제거한다.
   그 후, 4개의 열을 가지고 Statsmodels.OLS 로 학습하여 선형관계를 파악한다.
+        
         ```
         ['like', 'dislike', 'title_length', 'comment_cosine_similarity']
         ```
