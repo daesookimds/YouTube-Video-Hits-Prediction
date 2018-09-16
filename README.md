@@ -84,6 +84,11 @@
 
 ### Result
 
+- As a result of limited data, this is not best answer.
+
+- If you want to predict the number of views, focus on the like, dislike, (the number of)comments, (the number of)subscribers, uploaded_days.
+
+- If you want to increase the number of views, get 'LIKE' and write a comment similar to the tag first.
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -170,3 +175,8 @@
         
 ### 결과
 
+- 제한된 10000개의 데이터를 사용하였기 때문에 정답이 아니다.
+
+- 조회수를 예측하고 싶다면 '좋아요', '싫어요' 수와 댓글수, 구독자수, 업로드된 후 지난 일 수를 살펴보면 된다.
+
+- 조회수가 향상되도록 유도하고 싶다면 '좋아요'를 누르도록 유도하고 첫 댓글로 태그와 비슷한 댓글 설명을 쓰면 좋다. 
