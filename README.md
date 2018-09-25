@@ -4,7 +4,7 @@
 
 ```Let's find out what characteristics a video with a high number of views has.```
 
-```Project Period :2018.8.16 ~```
+```Project Period :2018.8.16 ~ 2018.09.21```
 
 
 ### Objective of project
@@ -96,7 +96,7 @@
 
 ```높은 조회수를 가지고 있는 동영상의 특성들을 찾아보자```
 
-```프로젝트 기간 :2018.8.16 ~```
+```프로젝트 기간 :2018.8.16 ~ 2018.09.21```
 
 ### 프로젝트 목적
 
